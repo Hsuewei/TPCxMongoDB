@@ -19,6 +19,7 @@ Table of Contents
         - [Disable THP](#disable-thp)
         - [Configure NUMA Interleave For mongod and mongos](#configure-numa-interleave-for-mongod-and-mongos)
         - [Configure ulimit for mongod and mongos instance through systemd](#configure-ulimit-for-mongod-and-mongos-instance-through-systemd)
+        - [Separate data(journal,collection,index,data) and log(mongod.log) storage location](#Separate data(journal,collection,index,data) and log(mongod.log) storage location)
     
 
  
@@ -220,15 +221,24 @@ LimitNPROC=64000
 vim /etc/systemd/system/mongos.service
 ```
 > Please refer to ```conf/mongos.service``` for sample
-
-##### create user, mongos
+#### create mongos.conf
+> Please refer tp ``` conf/mongos.conf``` for sample
+#### create user, mongos
 ``` shell
 adduser mongos -g mongod --no-create-home
 ```
-##### space for mongos.log
+#### space for mongos.log
 ``` shell
 mkdir /var/log/mongos
 chown mongos:mongod /var/log/mongos
 ```
+
+### Separate data(journal,collection,index,data) and log(mongod.log) storage location
+LVM | components | usage
+:----|:-----------|:------
+LVM | INTEL SSDSC2BA800G4 \*1 | OS<br>data.index 
+LVM-raid-5 | SAMSUNG MZ7KM960HAHP-00005 \*3 | data.collection<br>data.journal<br>log.mongod.log
+LVM-raid-10 | SAMSUNG MZ7KM960HAHP-00005 \*4 | data.data
+
 
 
