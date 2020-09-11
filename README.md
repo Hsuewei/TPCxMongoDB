@@ -19,7 +19,7 @@ Table of Contents
         - [Disable THP](#disable-thp)
         - [Configure NUMA Interleave For mongod and mongos](#configure-numa-interleave-for-mongod-and-mongos)
         - [Configure ulimit for mongod and mongos instance through systemd](#configure-ulimit-for-mongod-and-mongos-instance-through-systemd)
-        - [Separate data\(journal,collection,index,data\) and log\(mongod.log\) storage location](#separate data\(journal,collection,index,data\) and log\(mongod.log\) storage location)
+        - [Separate data and log storage location](#separate data journal,collection,index,data and log mongod.log storage location)
     
 
  
@@ -37,8 +37,6 @@ Table of Contents
 
 
 ## Hardware Info 
-servers |
-
 - servers:
   - QuantaGrid D51PH-1ULH : 4
     - CPU: Intel Xeon E5 2680 V3 : 8 
@@ -65,6 +63,8 @@ config | config server,mongos | 10.106.51.152 | mongodb-configsvr | 27019,27017
 shard01| shardA | 10.106.51.149 | mongodb-shard01 | 27018
 shard02| shardB | 10.106.51.150 | mongodb-shard02 | 27018
 shard03| shardC | 10.106.51.151 | mongodb-shard03 | 27018
+
+> ```config``` only equipped with 1 SSD as boot and 4 16G memory
 
 ## Deployment
 
@@ -236,6 +236,11 @@ chown mongos:mongod /var/log/mongos
 ```
 ---
 ### Separate data(journal,collection,index,data) and log(mongod.log) storage location
+#### ref:
+1. [logical volume administration](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/html/logical_volume_manager_administration/LV#raid0volumes)
+2. [Configure raid logical volumes](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/8/html/configuring_and_managing_logical_volumes/assembly_configure-mange-raid-configuring-and-managing-logical-volumes)
+3. [LVM on Raind Calculator](https://access.redhat.com/labs/lvmraidcalculator/)
+4. [File System Layout Calculator](https://access.redhat.com/labs/fslayoutcalculator/)
 
 #### storage on ```shard01```,```shard02```,```shard03```
 LVM | components | usage
@@ -247,6 +252,43 @@ LVM-raid-10 | SAMSUNG MZ7KM960HAHP-00005 \*4 | data.data
 LVM | components | usage
 :----|:-----------|:------
 LVM | INTEL SSDSC2BA800G4 \*1 | OS<br>data.index<br>data.journal<br>data.collection<br>data.data<br>log.mongod.log
+#### Note:
+1. Raid-10,Raid5 or Raid6 are recommended. Raid-0 is only for lab
+2. Main growth of data will be on data.collection and data.index directory. Make sure these two have enough space
+#### LVM-raid-5
+``` shell
+pvcreate /dev/sdb;pvcreate /dev/sdc;pvcreate /dev/sdd
+vgcreate --dataalignment 128K --physicalextentsize 4096K mongodb-j-l /dev/sdb /dev/sdc /dev/sdd 
+lvcreate --type raid5 -i 2 -I 64K -l 100%FREE -n storage mongodb-j-l
+```
+#### LVM-raid10
+``` shell
+pvcreate /dev/sdd;pvcreate /dev/sde;pvcreate /dev/sdf;pvcreate /dev/sdg
+vgcreate --dataalignment 128K --physicalextentsize 4096K mongodb-d /dev/sdd /dev/sde /dev/sdg /dev/sdg
+lvcreate --type raid10 -i 2 -m 1 -I 64k -l 100%FREE -n storage mongodb-d
+```
+#### Format FS and mount
+``` shell
+mkfs.xfs  -b 4096 -d su=64k,sw=2 /dev/mapper/mongodb--j--l-storage
+mkfs.xfs  -b 4096 -d su=64k,sw=2 /dev/mapper/mongodb--d-storage 
+mkdir -p /mongodb/{data,log}
+mount /dev/mapper/mongodb--j--l-storage /mongodb/log
+
+mount /dev/mapper/mongodb--d-storage /mongodb/data
+mkdir -p /mongodb/log/{collection,journal}
+mkdir -p /home/mongodb/data/index
+```
+#### Separate Storage with symbolic link
+``` shell
+cd /mongodb/data;ln -s /mongodb/log/collection
+cd /mongodb/data;ln -s /mongodb/log/journal
+cd /mongodb/data;ln -s /home/mongodb/data/index
+```
+#### Change Owner
+``` shell
+chown -R mongod:mongod /mongodb
+chown -R mongod:mongod /home/mongodb
+```
 
 
 
