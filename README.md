@@ -13,6 +13,11 @@ Table of Contents
     * [Topology](#topology)
     * [Install MongoDB](#install-mongodb)
     * [Environment Set-up](#environment-set-up)
+        - [Update GNU C Library](# update-gnu-c-library)
+        - [Avoid Swap As Possible As System Can](# avoid-swap-as-possible-as-system-can)
+        - [Disable SeLinux And Firewall](# disable-selinux-and-firewall)
+        - [Disable THP](# disable-thp)
+        - [Configure NUMA: -- interleave For mongod and mongos](# configure-numa-interleave-for-mongod-and-mongos)
     
 
  
@@ -95,19 +100,19 @@ Please refer to conf/{ config-mongod.conf, shard-mongod.conf} for samples
 #### Create mongos.conf on ```config```
 Please refer to conf/mongos.conf for samples
 
-### Environment Set-up:
-#### update GNU C Library
+### Environment Set-up
+#### Update GNU C Library
 ``` shell
 yum update glibc
 ```
-#### avoid swap as possible as system can
+#### Avoid Swap As Possible As System Can
 ```shell
 echo vm.swappiness = 1 >> /etc/sysctl.conf
 ```
 ```shell
 sysctl -p
 ```
-#### disable secure Linux and fire wall
+#### Disable SeLinux And Firewall
 ``` shell
 sed -i 's/^SELINUX=.*$/SELINUX=disabled/g' /etc/sysconfig/selinux
 ```
@@ -118,7 +123,7 @@ setenforce 0
 systemctl stop firewalld
 systemctl disable firewalld 
 ```
-#### disable THP(transparent huge page)
+#### Disable THP
 ##### disable THP on the fly
 ``` shell
 vim /etc/rc.d/rc.local
@@ -147,7 +152,7 @@ grub2-mkconfig -o /boot/efi/EFI/redhat/grub.cfg
 grub2-mkconfig -o /boot/grub2/grub.cfg
 ```
 
-#### Configure NUMA: -- interleave and start mongod and mongos with ```numactl```
+#### Configure NUMA: -- interleave For mongod and mongos
 ##### disable zone reclaim:
 ``` shell
 echo 0 | sudo tee /proc/sys/vm/zone_reclaim_mode
@@ -159,7 +164,7 @@ sudo sysctl -w vm.zone_reclaim_mode=0
 ``` shell
 ps --no-headers -o comm 1
 ```
-
+> If it is ``` init```, Please refer to [Configure NUMA on Linux part for other tutorial](https://docs.mongodb.com/manual/administration/production-notes/#Configuring%20NUMA%20on%20Linux)
 
 ##### establish a new service file
 ``` shell
