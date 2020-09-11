@@ -73,7 +73,7 @@ shard03| shardC | 10.106.51.151 | mongodb-shard03 | 27018
 
 ### Topology
 ![](images/topology.png =100*20)
-
+<img src="/images/topology.png" alt="drawing" width="200"/>
 ### Install MongoDB
 #### ref:
   - [Mongodb official doc](https://docs.mongodb.com/manual/installation/)
