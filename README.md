@@ -76,7 +76,7 @@ shard03| shardC | 10.106.51.151 | mongodb-shard03 | 27018
 another way to show image
 ![](images/topology.png)
 -->
-<img src="/images/topology.png" alt="drawing" width="500" height="200"/>
+<img src="/images/topology.png" alt="drawing" width="700" height="500"/>
 
 
 ### Install MongoDB
