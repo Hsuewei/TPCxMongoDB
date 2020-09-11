@@ -105,6 +105,7 @@ Please refer to conf/{ config-mongod.conf, shard-mongod.conf} for samples
 ``` shell
 yum update glibc
 ```
+---
 #### Avoid Swap As Possible As System Can
 ```shell
 echo vm.swappiness = 1 >> /etc/sysctl.conf
@@ -112,6 +113,7 @@ echo vm.swappiness = 1 >> /etc/sysctl.conf
 ```shell
 sysctl -p
 ```
+---
 #### Disable SeLinux And Firewall
 ``` shell
 sed -i 's/^SELINUX=.*$/SELINUX=disabled/g' /etc/sysconfig/selinux
@@ -123,6 +125,7 @@ setenforce 0
 systemctl stop firewalld
 systemctl disable firewalld 
 ```
+---
 #### Disable THP
 ##### disable THP on the fly
 ``` shell
@@ -139,8 +142,9 @@ chmod +x /etc/rc.d/rc.local
 ##### Disable THP on boot
 ``` shell
 vim /etc/default/grub
-transparent_hugepage=never
 ```
+> add ```transparent_hugepage=never```
+
 images
 ##### Two different commands for different platform
 (On UEFI machine)
@@ -151,8 +155,12 @@ grub2-mkconfig -o /boot/efi/EFI/redhat/grub.cfg
 ``` shell
 grub2-mkconfig -o /boot/grub2/grub.cfg
 ```
-
+---
 #### Configure NUMA Interleave For mongod and mongos
+##### install ```numactl```
+``` shell
+sudo yum -y install numactl
+```
 ##### disable zone reclaim:
 ``` shell
 echo 0 | sudo tee /proc/sys/vm/zone_reclaim_mode
@@ -166,12 +174,17 @@ ps --no-headers -o comm 1
 ```
 > If it is ``` init```, Please refer to [Configure NUMA on Linux part for other tutorial](https://docs.mongodb.com/manual/administration/production-notes/#Configuring%20NUMA%20on%20Linux)
 
-##### establish a new service file
+##### establish a new service file and edit
 ``` shell
 sudo cp /lib/systemd/system/mongod.service /etc/systemd/system
 ```
-##### install ```numactl```
+> modify the ```ExecStart```
+>> ExecStart=/usr/bin/numactl --interleave=all /usr/bin/mongod --config /etc/mongod.conf
+>>> image
+#### apply changes to systemd
 ``` shell
-sudo yum -y install numactl
+systemctl daemon-reload
 ```
+---
+
 
