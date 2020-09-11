@@ -99,7 +99,7 @@ shard03| shardC | 10.106.51.151 | mongodb-shard03 | 27018
   sudo yum install mongodb-org
   ```
 #### Modify /etc/mongod.conf
-Please refer to conf/{ config-mongod.conf, shard-mongod.conf} for samples
+> Please refer to conf/{ config-mongod.conf, shard-mongod.conf} for samples
 - Note:
   - The Lab environment did not deploy config server replica set and shard server replica set
   - (i.e. Only 1 member in config server replica set instead of 3)
@@ -240,10 +240,12 @@ chown mongos:mongod /var/log/mongos
 ---
 ### Separate data and log storage location
 #### ref:
-1. [logical volume administration](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/html/logical_volume_manager_administration/LV#raid0volumes)
-2. [Configure raid logical volumes](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/8/html/configuring_and_managing_logical_volumes/assembly_configure-mange-raid-configuring-and-managing-logical-volumes)
-3. [LVM on Raind Calculator](https://access.redhat.com/labs/lvmraidcalculator/)
-4. [File System Layout Calculator](https://access.redhat.com/labs/fslayoutcalculator/)
+1. [RHEL:logical volume administration](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/html/logical_volume_manager_administration/LV#raid0volumes)
+2. [RHEL:Configure raid logical volumes](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/8/html/configuring_and_managing_logical_volumes/assembly_configure-mange-raid-configuring-and-managing-logical-volumes)
+3. [RHEL:LVM on Raind Calculator](https://access.redhat.com/labs/lvmraidcalculator/)
+4. [RHEL:File System Layout Calculator](https://access.redhat.com/labs/fslayoutcalculator/)
+5. [Mongodb: wiredTiger.directoryForIndexes](https://docs.mongodb.com/manual/reference/configuration-options/#storage.wiredTiger.engineConfig.directoryForIndexes)
+6. [Mongodb: wiredTiger Journaling](https://docs.mongodb.com/manual/core/journaling/#journaling-and-the-wiredtiger-storage-engine)
 
 #### storage on ```shard01```,```shard02```,```shard03```
 LVM | components | usage
