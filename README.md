@@ -235,7 +235,7 @@ mkdir /var/log/mongos
 chown mongos:mongod /var/log/mongos
 ```
 ---
-### Separate data(journal,collection,index,data) and log(mongod.log) storage location
+### Separate data and log storage location
 #### ref:
 1. [logical volume administration](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/html/logical_volume_manager_administration/LV#raid0volumes)
 2. [Configure raid logical volumes](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/8/html/configuring_and_managing_logical_volumes/assembly_configure-mange-raid-configuring-and-managing-logical-volumes)
