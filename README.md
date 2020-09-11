@@ -1,7 +1,6 @@
 TPCxMongoDB
 ===
 Use mock date from Taiwan Power Company and get familiar with MongoDB
-<iframe width="100%" height="500" src="https://hackmd.io/features" frameborder="0"></iframe>
 
 Table of Contents
 ===
@@ -22,7 +21,8 @@ Table of Contents
         - [Separate data and log storage location](#separate-data-and-log-storage-location)
 * [Establish a sharded cluster](#establish-a-sharded-cluster)
     * [initiate every roles in mongodb](#initiate-every-role-in-mongodb)
-    * [Create a database and collection](#create-database-and-collection)
+    * [Create database and collection](#create-database-and-collection)
+* [Establish test dataset](#establish-test-dataset)
     
 
  
@@ -295,7 +295,6 @@ chown -R mongod:mongod /home/mongodb
 ---
 
 ## Establish a sharded cluster
----
 ### initiate every roles in mongodb
 #### start mongod
 ``` shell
@@ -461,7 +460,7 @@ rs.initiate(
 systemctl start mongos
 ```
 ---
-### Create a database and collection
+### Create database and collection
 #### add shards to cluster
 ``` shell
 # connect to mongos through mongo shell
@@ -483,8 +482,16 @@ sh.addShard( "<replSetName>/shardC-1:27018,shardC-2:27018,……")
 2. In this test, each replica test only have 1 member
 #### enble database sharding
 ``` javascript
-\\ connected to mongos
-\\ 'tpc_poc' is the database name
+// connected to mongos
+// 'tpc_poc' is the database name
 sh.enableSharding("tpc_poc")
 ```
+
+## Establish test dataset
+> Java is required. OpenJDK 1.8 or newer are prefered
+``` shell
+# create place for dataset
+mkdir -p /home/source
+# generate 500 customer, 3 years dataset
+java -jar lpgen.jar 1 500 3 /home/source
 
