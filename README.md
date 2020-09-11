@@ -210,5 +210,25 @@ LimitNOFILE=64000
 # (processes/threads)
 LimitNPROC=64000
 ```
+#### (for host that running mongos) create mongos.service
+Note:
+   1. This step will use systemd to manage mongos and mongos will write mongos.log to local
+      - mongos.log growth rate: 212K/4min
+   2. If you don't want preserve mongos.log, Please refer to ```conf/mongos-simple.service``` for sample
+   3. User running mongos should have permission to mongos.log and mongos.conf
+``` shell
+vim /etc/systemd/system/mongos.service
+```
+> Please refer to ```conf/mongos.service for sample
+
+##### create user, mongos
+``` shell
+adduser mongos -g mongod --no-create-home
+```
+##### space for mongos.log
+``` shell
+mkdir /var/log/mongos
+chown mongos:mongod /var/log/mongos
+```
 
 
