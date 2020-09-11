@@ -17,7 +17,7 @@ Table of Contents
         - [Avoid Swap As Possible As System Can](#avoid-swap-as-possible-as-system-can)
         - [Disable SeLinux And Firewall](#disable-selinux-and-firewall)
         - [Disable THP](#disable-thp)
-        - [Configure NUMA: -- interleave For mongod and mongos](#configure-numa-interleave-for-mongod-and-mongos)
+        - [Configure NUMA Interleave For mongod and mongos](#configure-numa-interleave-for-mongod-and-mongos)
     
 
  
@@ -152,7 +152,7 @@ grub2-mkconfig -o /boot/efi/EFI/redhat/grub.cfg
 grub2-mkconfig -o /boot/grub2/grub.cfg
 ```
 
-#### Configure NUMA: -- interleave For mongod and mongos
+#### Configure NUMA Interleave For mongod and mongos
 ##### disable zone reclaim:
 ``` shell
 echo 0 | sudo tee /proc/sys/vm/zone_reclaim_mode
