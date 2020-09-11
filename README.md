@@ -98,7 +98,7 @@ Please refer to conf/{ config-mongod.conf, shard-mongod.conf} for samples
   - (i.e. Only 1 member in config server replica set instead of 3)
   - (i.e. Only 1 member in each shard replica set instead of 3)
 #### Create mongos.conf on ```config```
-Please refer to conf/mongos.conf for samples
+> Please refer to conf/mongos.conf for samples
 
 ### Environment Set-up
 #### Update GNU C Library
