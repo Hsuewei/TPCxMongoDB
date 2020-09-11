@@ -13,11 +13,11 @@ Table of Contents
     * [Topology](#topology)
     * [Install MongoDB](#install-mongodb)
     * [Environment Set-up](#environment-set-up)
-        - [Update GNU C Library](# update-gnu-c-library)
-        - [Avoid Swap As Possible As System Can](# avoid-swap-as-possible-as-system-can)
-        - [Disable SeLinux And Firewall](# disable-selinux-and-firewall)
-        - [Disable THP](# disable-thp)
-        - [Configure NUMA: -- interleave For mongod and mongos](# configure-numa-interleave-for-mongod-and-mongos)
+        - [Update GNU C Library](#update-gnu-c-library)
+        - [Avoid Swap As Possible As System Can](#avoid-swap-as-possible-as-system-can)
+        - [Disable SeLinux And Firewall](#disable-selinux-and-firewall)
+        - [Disable THP](#disable-thp)
+        - [Configure NUMA: -- interleave For mongod and mongos](#configure-numa-interleave-for-mongod-and-mongos)
     
 
  
