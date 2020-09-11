@@ -19,7 +19,7 @@ Table of Contents
         - [Disable THP](#disable-thp)
         - [Configure NUMA Interleave For mongod and mongos](#configure-numa-interleave-for-mongod-and-mongos)
         - [Configure ulimit for mongod and mongos instance through systemd](#configure-ulimit-for-mongod-and-mongos-instance-through-systemd)
-        - [Separate data and log storage location](#separate data journal,collection,index,data and log mongod.log storage location)
+        - [Separate data and log storage location](#separate-data-journal-collection-index-data-and-log-mongodlog-storage-location)
     
 
  
