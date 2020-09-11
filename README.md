@@ -19,7 +19,7 @@ Table of Contents
         - [Disable THP](#disable-thp)
         - [Configure NUMA Interleave For mongod and mongos](#configure-numa-interleave-for-mongod-and-mongos)
         - [Configure ulimit for mongod and mongos instance through systemd](#configure-ulimit-for-mongod-and-mongos-instance-through-systemd)
-        - [Separate data(journal,collection,index,data) and log(mongod.log) storage location](#Separate data(journal,collection,index,data) and log(mongod.log) storage location)
+        - [Separate data(journal,collection,index,data) and log(mongod.log) storage location](#separate data(journal,collection,index,data) and log(mongod.log) storage location)
     
 
  
@@ -37,6 +37,8 @@ Table of Contents
 
 
 ## Hardware Info 
+servers |
+
 - servers:
   - QuantaGrid D51PH-1ULH : 4
     - CPU: Intel Xeon E5 2680 V3 : 8 
@@ -232,13 +234,19 @@ adduser mongos -g mongod --no-create-home
 mkdir /var/log/mongos
 chown mongos:mongod /var/log/mongos
 ```
-
+---
 ### Separate data(journal,collection,index,data) and log(mongod.log) storage location
+
+#### storage on ```shard01```,```shard02```,```shard03```
 LVM | components | usage
 :----|:-----------|:------
 LVM | INTEL SSDSC2BA800G4 \*1 | OS<br>data.index 
 LVM-raid-5 | SAMSUNG MZ7KM960HAHP-00005 \*3 | data.collection<br>data.journal<br>log.mongod.log
 LVM-raid-10 | SAMSUNG MZ7KM960HAHP-00005 \*4 | data.data
+#### storage on ```config```
+LVM | components | usage
+:----|:-----------|:------
+LVM | INTEL SSDSC2BA800G4 \*1 | OS<br>data.index<br>data.journal<br>data.collection<br>data.data<br>log.mongod.log
 
 
 
