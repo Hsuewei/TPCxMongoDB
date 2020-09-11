@@ -154,8 +154,7 @@ chmod +x /etc/rc.d/rc.local
 vim /etc/default/grub
 ```
 > add ```transparent_hugepage=never```
-
-images
+>> ![](images/THP.png)
 ##### Two different commands for different platform
 (On UEFI machine)
 ``` shell
@@ -190,7 +189,7 @@ sudo cp /lib/systemd/system/mongod.service /etc/systemd/system
 ```
 > modify the ```ExecStart```
 >> ExecStart=/usr/bin/numactl --interleave=all /usr/bin/mongod --config /etc/mongod.conf
->>> image
+>>> ![](images/execstart.png)
 #### apply changes to systemd
 ``` shell
 systemctl daemon-reload
