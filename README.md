@@ -195,7 +195,8 @@ systemctl daemon-reload
 vim /etc/systemd/system/mongod.service
 ```
 add these lines:
-> 	[Service]
+```
+	[Service]
 	# (file size)
 	LimitFSIZE=infinity
 	# (cpu time)
@@ -207,7 +208,7 @@ add these lines:
 	# (open files)
 	LimitNOFILE=64000
 	# (processes/threads)
-   LimitNPROC=64000
-   
+  	LimitNPROC=64000
+```
 
 
