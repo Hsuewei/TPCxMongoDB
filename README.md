@@ -293,11 +293,166 @@ chown -R mongod:mongod /home/mongodb
 ---
 
 ## Establish a sharded cluster
-### Start mongod
+### initiate every roles in mongodb
+#### start mongod
 ``` shell
 systemctl start mongod
 ```
-### Start Mongos
+#### (for host running config server)initiate config server
+```config```
+```shell
+# use mongo shell connect to config server
+mongo 10.106.51.152:27019
+```
+``` javascript
+rs.initiate(
+{
+  "_id": "mongodb-configsvr",
+  "version": 1,
+  "term": 1,
+  "protocolVersion": 1,
+  "writeConcernMajorityJournalDefault": true,
+  "configsvr": true,
+  "members": [
+        {
+          "_id": 0,
+          "host": "config:27019",
+          "arbiterOnly": false,
+          "buildIndexes": true,
+          "hidden": false,
+          "priority": 500,
+          "tags": {
+              "scripting-date": "2020-08-04"
+          },
+          "slaveDelay": 0,
+          "votes": 1
+        }
+  ],
+  "settings": {
+        "chainingAllowed": true,
+        "heartbeatTimeoutSecs": 10,
+        "electionTimeoutMillis": 10000,
+        "catchUpTimeoutMillis": -1
+  }
+}
+)
+```
+#### (for host running shard server)initiate shard server
+```shard01```
+```shell
+# use mongo shell connect to shard server
+mongo 10.106.51,149:27019
+```
+```javascript
+rs.initiate(
+{
+  "_id": "mongodb-shard01",
+  "version": 1,
+  "term": 1,
+  "protocolVersion": 1,
+  "writeConcernMajorityJournalDefault": true,
+  "configsvr": false,
+  "members": [
+        {
+          "_id": 0,
+          "host": "shard01:27018",
+          "arbiterOnly": false,
+          "buildIndexes": true,
+          "hidden": false,
+          "priority": 500,
+          "tags": {
+              "scripting-date": "2020-08-04"
+          },
+          "slaveDelay": 0,
+          "votes": 1
+        }
+  ],
+  "settings": {
+        "chainingAllowed": true,
+        "heartbeatTimeoutSecs": 10,
+        "electionTimeoutMillis": 10000,
+        "catchUpTimeoutMillis": -1
+  }
+}
+)
+```
+```shard02```
+```shell
+# use mongo shell connect to shard server
+mongo 10.106.51.150:27018
+```
+```javascript
+rs.initiate(
+{
+  "_id": "mongodb-shard02",
+  "version": 1,
+  "term": 1,
+  "protocolVersion": 1,
+  "writeConcernMajorityJournalDefault": true,
+  "configsvr": false,
+  "members": [
+        {
+          "_id": 0,
+          "host": "shard01:27018",
+          "arbiterOnly": false,
+          "buildIndexes": true,
+          "hidden": false,
+          "priority": 500,
+          "tags": {
+              "scripting-date": "2020-08-04"
+          },
+          "slaveDelay": 0,
+          "votes": 1
+        }
+  ],
+  "settings": {
+        "chainingAllowed": true,
+        "heartbeatTimeoutSecs": 10,
+        "electionTimeoutMillis": 10000,
+        "catchUpTimeoutMillis": -1
+  }
+}
+)
+```
+```shard03```
+```shell
+# use mongo shell connect to shard server
+mongo 10.106.51.151:27018
+```
+```javascript
+rs.initiate(
+{
+  "_id": "mongodb-shard03",
+  "version": 1,
+  "term": 1,
+  "protocolVersion": 1,
+  "writeConcernMajorityJournalDefault": true,
+  "configsvr": false,
+  "members": [
+        {
+          "_id": 0,
+          "host": "shard01:27018",
+          "arbiterOnly": false,
+          "buildIndexes": true,
+          "hidden": false,
+          "priority": 500,
+          "tags": {
+              "scripting-date": "2020-08-04"
+          },
+          "slaveDelay": 0,
+          "votes": 1
+        }
+  ],
+  "settings": {
+        "chainingAllowed": true,
+        "heartbeatTimeoutSecs": 10,
+        "electionTimeoutMillis": 10000,
+        "catchUpTimeoutMillis": -1
+  }
+}
+)
+```
+#### Start Mongos
 
 
 
