@@ -18,6 +18,7 @@ Table of Contents
         - [Disable SeLinux And Firewall](#disable-selinux-and-firewall)
         - [Disable THP](#disable-thp)
         - [Configure NUMA Interleave For mongod and mongos](#configure-numa-interleave-for-mongod-and-mongos)
+        - [Configure ulimit for mongod and mongos instance through systemd]
     
 
  
@@ -186,5 +187,27 @@ sudo cp /lib/systemd/system/mongod.service /etc/systemd/system
 systemctl daemon-reload
 ```
 ---
+### Configure ulimit for mongod and mongos instance through systemd
+#### ref:
+   - [recommended ulimit setting for mongod and mongos](https://docs.mongodb.com/manual/reference/ulimit/)
+#### (for host running mongod) edit mongod.service
+``` shell
+vim /etc/systemd/system/mongod.service
+```
+add these lines:
+> 	[Service]
+	# (file size)
+	LimitFSIZE=infinity
+	# (cpu time)
+	LimitCPU=infinity
+	# (virtual memory size)
+	LimitAS=infinity
+	# (locked-in-memory size)
+	LimitMEMLOCK=infinity
+	# (open files)
+	LimitNOFILE=64000
+	# (processes/threads)
+   LimitNPROC=64000
+   
 
 
