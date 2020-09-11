@@ -1,7 +1,7 @@
 TPCxMongoDB
 ===
 Use mock date from Taiwan Power Company and get familiar with MongoDB
-
+<iframe width="100%" height="500" src="https://hackmd.io/features" frameborder="0"></iframe>
 
 Table of Contents
 ===
@@ -21,6 +21,8 @@ Table of Contents
         - [Configure ulimit for mongod and mongos instance through systemd](#configure-ulimit-for-mongod-and-mongos-instance-through-systemd)
         - [Separate data and log storage location](#separate-data-and-log-storage-location)
 * [Establish a sharded cluster](#establish-a-sharded-cluster)
+    * [initiate every roles in mongodb](#initiate-every-role-in-mongodb)
+    * [Create a database and collection](#create-database-and-collection)
     
 
  
@@ -452,7 +454,31 @@ rs.initiate(
 }
 )
 ```
-#### Start Mongos
-
+#### (On host running mongos.service)Start Mongos
+> Ensure ```mongos.conf``` and ```mongos.service``` are configured properly(IPs,hostnames and path....)
+``` shell
+systemctl start mongos
+```
+---
+### Create a database and collection
+#### add shards to cluster
+``` shell
+# connect to mongos through mongo shell
+mongo 10.106.51.152:27017
+```
+``` javascript
+// add shards(shardA,shardB,shardC) to cluster
+sh.addShard("mongodb-shard01/shard01:27018")
+sh.addShard("mongodb-shard02/shard02:27018")
+sh.addShard("mongodb-shard03/shard03:27018")
+```
+Note:
+1. Syntax for ```sh.addShard()```
+``` 
+sh.addShard( "<replSetName>/shardA-1:27018,shardA-2:27018,……")
+sh.addShard( "<replSetName>/shardB-1:27018,shardB-2:27018,……")
+sh.addShard( "<replSetName>/shardC-1:27018,shardC-2:27018,……")
+```
+2. In this test, each replica test only have 1 member
 
 
