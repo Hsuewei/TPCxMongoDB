@@ -73,7 +73,9 @@ shard03| shardC | 10.106.51.151 | mongodb-shard03 | 27018
 
 ### Topology
 
-
+:::info
+![](images/topology.png)
+:::
 
 
 
