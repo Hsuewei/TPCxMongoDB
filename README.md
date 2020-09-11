@@ -105,6 +105,7 @@ shard03| shardC | 10.106.51.151 | mongodb-shard03 | 27018
   - (i.e. Only 1 member in config server replica set instead of 3)
   - (i.e. Only 1 member in each shard replica set instead of 3)
 #### Create mongos.conf on ```config```
+Recommended path to mongos.conf would be ```/etc/mongos.conf```
 > Please refer to conf/mongos.conf for samples
 ---
 ### Environment Set-up
