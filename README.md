@@ -72,12 +72,7 @@ shard03| shardC | 10.106.51.151 | mongodb-shard03 | 27018
 ## Deployment
 
 ### Topology
-
-:::info
-![](images/topology.png)
-:::
-
-
+![](images/topology.png =100*20)
 
 ### Install MongoDB
 #### ref:
