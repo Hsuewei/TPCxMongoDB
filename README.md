@@ -73,6 +73,7 @@ shard03| shardC | 10.106.51.151 | mongodb-shard03 | 27018
   ```shell
   vim /etc/yum.repos.d/mongodb-org-4.4.repo
   ```
+  add these lines:
   ```shell
   [mongodb-org-4.4]
   name=MongoDB Repository
@@ -81,6 +82,7 @@ shard03| shardC | 10.106.51.151 | mongodb-shard03 | 27018
   enabled=1
   gpgkey=https://www.mongodb.org/static/pgp/server-4.4.asc
   ```
+  install wiith yum:
   ```shell
   sudo yum install mongodb-org
   ```
@@ -157,12 +159,13 @@ sudo sysctl -w vm.zone_reclaim_mode=0
 ``` shell
 ps --no-headers -o comm 1
 ```
-If it is ``` init```, Please refer to ['Configure NUMA on Linux' part for other tutorial](https://docs.mongodb.com/manual/administration/production-notes/#Configuring%20NUMA%20on%20Linux)
-#### establish a new service file
+
+
+##### establish a new service file
 ``` shell
 sudo cp /lib/systemd/system/mongod.service /etc/systemd/system
 ```
-#### install ```numactl```
+##### install ```numactl```
 ``` shell
 sudo yum -y install numactl
 ```
