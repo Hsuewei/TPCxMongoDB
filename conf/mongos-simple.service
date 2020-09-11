@@ -1,0 +1,22 @@
+[Unit]
+Description=High-performance, schema-free document-oriented database
+After=syslog.target
+After=network.target
+
+[Service]
+User=mongos
+Group=mongod
+Type=simple
+RuntimeDirectory=mongos
+RuntimeDirectoryMode=755
+PIDFile=/var/run/mongos/mongos.pid
+ExecStart=/usr/bin/numactl --interleave=all /usr/bin/mongos \
+    --config /etc/mongos.conf \
+    --pidfilepath /var/run/mongos/mongos.pid
+LimitFSIZE=infinity
+LimitCPU=infinity
+LimitAS=infinity
+LimitNOFILE=64000
+LimitNPROC=64000
+[Install]
+WantedBy=multi-user.target
