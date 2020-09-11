@@ -5,12 +5,20 @@ Use mock date from Taiwan Power Company and get familiar with MongoDB
 
 Table of Contents
 ===
-[Highlights](#highlights)  
-[Hardware Info](#hardware-info)  
+* [Highlights](#highlights)  
+* [Hardware Info](#hardware-info)
+* [Software Info](#software-info)
+* [Host Info](#host-info)
+* [Deployment](#deployment)
+    * [Topology](#topology)
+    * [Install MongoDB](#install-mongodb)
+    * [Environment Set-up](#environment-set-up)
+    
+
  
 
 
-# Highlights 
+## Highlights 
   - dev_15003_3's result is the best
   - dev_15003_5 set 1 zone range per customerId-readingType combination
   - dev_15003_2 experiment round on zone range test, casue unbalanced chunk distribution
@@ -36,18 +44,12 @@ Table of Contents
   - QuantaMesh T1048-LB9 : 1
     - cables: 1G Cat5e CABLE - 2m: 4
     
-## Software info
+## Software Info
 OS | Application
 ---|------------
 RHEL 7.5 | Mongo DB Community 4.4.0
 
-## Deployment
-
-### topology
-
-
-
-### host info
+## Host Info
 Hostname | roles | IP | replica set name | port
 ---------|-------|----|------------------|-----
 config | config server,mongos | 10.106.51.152 | mongodb-configsvr | 27019,27017
@@ -55,7 +57,15 @@ shard01| shardA | 10.106.51.149 | mongodb-shard01 | 27018
 shard02| shardB | 10.106.51.150 | mongodb-shard02 | 27018
 shard03| shardC | 10.106.51.151 | mongodb-shard03 | 27018
 
-### install MongoDB
+## Deployment
+
+### Topology
+
+
+
+
+
+### Install MongoDB
 #### ref:
   - [Mongodb official doc](https://docs.mongodb.com/manual/installation/)
   - [Mongodb production notes](https://docs.mongodb.com/manual/administration/production-notes/#hardware-considerations)
@@ -83,7 +93,7 @@ Please refer to conf/{ config-mongod.conf, shard-mongod.conf} for samples
 #### Create mongos.conf on ```config```
 Please refer to conf/mongos.conf for samples
 
-### Environment set-up:
+### Environment Set-up:
 #### update GNU C Library
 ``` shell
 yum update glibc
