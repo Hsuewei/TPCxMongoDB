@@ -20,6 +20,7 @@ Table of Contents
         - [Configure NUMA Interleave For mongod and mongos](#configure-numa-interleave-for-mongod-and-mongos)
         - [Configure ulimit for mongod and mongos instance through systemd](#configure-ulimit-for-mongod-and-mongos-instance-through-systemd)
         - [Separate data and log storage location](#separate-data-journal-collection-index-data-and-log-mongodlog-storage-location)
+* [Establish a sharded cluster](#establish-a-sharded-cluster)
     
 
  
@@ -289,6 +290,14 @@ cd /mongodb/data;ln -s /home/mongodb/data/index
 chown -R mongod:mongod /mongodb
 chown -R mongod:mongod /home/mongodb
 ```
+---
+
+## Establish a sharded cluster
+### Start mongod
+``` shell
+systemctl start mongod
+```
+### Start Mongos
 
 
 
