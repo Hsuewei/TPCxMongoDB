@@ -106,13 +106,13 @@ Please refer to conf/{ config-mongod.conf, shard-mongod.conf} for samples
   - (i.e. Only 1 member in each shard replica set instead of 3)
 #### Create mongos.conf on ```config```
 > Please refer to conf/mongos.conf for samples
-
+---
 ### Environment Set-up
 #### Update GNU C Library
 ``` shell
 yum update glibc
 ```
----
+
 #### Avoid Swap As Possible As System Can
 ```shell
 echo vm.swappiness = 1 >> /etc/sysctl.conf
@@ -120,7 +120,7 @@ echo vm.swappiness = 1 >> /etc/sysctl.conf
 ```shell
 sysctl -p
 ```
----
+
 #### Disable SeLinux And Firewall
 ``` shell
 sed -i 's/^SELINUX=.*$/SELINUX=disabled/g' /etc/sysconfig/selinux
@@ -132,7 +132,7 @@ setenforce 0
 systemctl stop firewalld
 systemctl disable firewalld 
 ```
----
+
 #### Disable THP
 ##### disable THP on the fly
 ``` shell
@@ -162,7 +162,7 @@ grub2-mkconfig -o /boot/efi/EFI/redhat/grub.cfg
 ``` shell
 grub2-mkconfig -o /boot/grub2/grub.cfg
 ```
----
+
 #### Configure NUMA Interleave For mongod and mongos
 ##### install ```numactl```
 ``` shell
@@ -295,6 +295,7 @@ chown -R mongod:mongod /home/mongodb
 ---
 
 ## Establish a sharded cluster
+---
 ### initiate every roles in mongodb
 #### start mongod
 ``` shell
@@ -480,5 +481,10 @@ sh.addShard( "<replSetName>/shardB-1:27018,shardB-2:27018,……")
 sh.addShard( "<replSetName>/shardC-1:27018,shardC-2:27018,……")
 ```
 2. In this test, each replica test only have 1 member
-
+#### enble database sharding
+``` javascript
+\\ connected to mongos
+\\ 'tpc_poc' is the database name
+sh.enableSharding("tpc_poc")
+```
 
