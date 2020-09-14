@@ -22,7 +22,7 @@ Comments:
 	- **timestamp** field will not be parsed as ```ISOdate()```
 	- **customerId** field will be trimmed off 0 and parsed as numeric type, which is nonsense. It should be pared as ```string```
 	- **veestatus** field should be parsed as ```string``` rather then numeric type
-![](images/dev_15003.png)
+![](../images/dev_15003.png)
 2. In dev_15003_2 round will mongoimport with datatypes
 
 ## how i query ?
