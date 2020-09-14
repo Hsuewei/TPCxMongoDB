@@ -7,6 +7,7 @@ dev_15003
 
 ## how i index collection and shard collection?
 > please refer to ```dev_15003/shardCollection.js```
+
 Comments:
 1. The ```db.collection.ensureIndex()``` parts are nonsense. I should create compound index once for all.
 2. Hash on **readingType** field is nonsense, I should hash on **timestamp** field.
