@@ -26,7 +26,7 @@ Comments:
 2. Start from dev_15003_2 , following rounds will mongoimport with datatypes
 
 ## how i query ?
-> Please refer to ```dev_15003/query.js
+> Please refer to ```dev_15003/query.js```
 >> Here use one-day query as an example
 ``` javascript
 db.dev_15003.aggregate([
