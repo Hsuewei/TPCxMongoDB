@@ -67,7 +67,7 @@ shard01| shardA | 10.106.51.149 | mongodb-shard01 | 27018
 shard02| shardB | 10.106.51.150 | mongodb-shard02 | 27018
 shard03| shardC | 10.106.51.151 | mongodb-shard03 | 27018
 
-> ```config``` only equipped with 1 SSD as boot and 4 16G memory
+> ```config``` only equipped with 1 SSD and boot and 4 16G-memory
 
 ## Deployment
 
