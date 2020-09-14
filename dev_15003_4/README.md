@@ -28,7 +28,7 @@ Comments:
 4. **veestatus** is parsed as ```string``` 
 
 ## how i query ?
-> Please refer to ```dev_15003_4/match.js
+> Please refer to ```dev_15003_4/match.js```
 >> Here use one-day query as an example
 ``` javascript
 db.dev_15003_4.aggregate([
