@@ -9,6 +9,7 @@ dev_15003_5
 
 ## how i pre-define Zones and Ranges?
 > please refer to ```dev_15003_5/createZone.js```
+
 Comments:
 1. 481 **customerId** and 6 **readingType** 2886 zones
 2. in each zone, hashed **timestamp** is accepted as any value
@@ -16,19 +17,20 @@ Comments:
 4. In this dataset, the uniqueness of data can be achieved with **customerId**, **readinType**, and **timestamp**
 > { readingType:1 , customerId:1, timestamp:"hashed" } 
 5. chunk distribution:
-![](images/dev_15003_5-chunk.png)
+![](../images/dev_15003_5-chunk.png)
 
 
 
 ## how i import files?
 > please refer to ```dev_15003_5/mongoimport-withoutHeader.sh```
+
 Comments:
 1. **timestamp** field is parsed as ```ISOdate()```
 2. **customerId** field is parsed as ```string```
 3. Few fun facts with ```mongoimport``` date.
 
 ## how i query ?
-> Please refer to ```dev_15003_5/match.js
+> Please refer to ```dev_15003_5/match.js```
 >> Here use one-day query as an example
 ``` javascript
 db.dev_15003_5.aggregate([
