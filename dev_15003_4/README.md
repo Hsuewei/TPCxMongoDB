@@ -4,11 +4,12 @@ dev_15003_4
 1. [Mongodb: Zone](https://docs.mongodb.com/manual/core/zone-sharding/#zone-sharding)
 2. [Mongodb: updateZoneKeyRange()](https://docs.mongodb.com/manual/reference/method/sh.updateZoneKeyRange/#updatezonekeyrange-method-init-chunk-distribution)
 3. [Lab: explore mongoimport-date]()
-4. [Mongodb: mongoimport, --columnHasTypes](https://docs.mongodb.com/database-tools/mongoimport/#cmdoption-mongoimport-columnshavetypes)
+4. [Mongodb: mongoimport, --columnsHaveTypes](https://docs.mongodb.com/database-tools/mongoimport/#cmdoption-mongoimport-columnshavetypes)
 
 
 ## how i pre-define Zones and Ranges?
 > please refer to ```dev_15003_4/createZone.js```
+
 Comments:
 1. Use hashed field (in this case **_id**) as first key in compound shard key
 2. In order to use ```index``` power, i should perform query with conditions that follow the order in shard key
@@ -19,10 +20,12 @@ Comments:
 
 ## how i import files?
 > please refer to ```dev_15003_4/mongoimport-withoutHeader.sh```
+
 Comments:
 1. **timestamp** field is parsed as ```ISOdate()```
 2. **customerId** field is parsed as ```string```
 3. Few fun facts with ```mongoimport``` date
+4. **veestatus** is parsed as ```string``` 
 
 ## how i query ?
 > Please refer to ```dev_15003_4/match.js
