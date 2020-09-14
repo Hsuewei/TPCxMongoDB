@@ -30,7 +30,7 @@ Comments:
 4. **veestatus** field is parsed as ```string``` 
 
 ## how i query ?
-> Please refer to ```dev_15003_2/query.js
+> Please refer to ```dev_15003_2/query.js```
 >> Here use one-day query as an example
 
 ``` javascript
