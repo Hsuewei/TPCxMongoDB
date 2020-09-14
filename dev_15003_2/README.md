@@ -15,7 +15,7 @@ Comments:
 2. Thus, I create 2886 zones and evenly associate to 3 shards
 3. In each zone, I expect any value of **timestamp**
 4. Eventually, this set-up cause uneven chunk distribution
-![](../images/chunks.png)
+![](../images/chunk.png)
 > even worse than collection that did not pre-define zoneRanges
 
 5. After some modifications, ```dev_15003_5``` has some refined results.
@@ -27,6 +27,7 @@ Comments:
 1. **timestamp** field is parsed as ```ISOdate()```
 2. **customerId** field is parsed as ```string```
 3. Few fun facts with ```mongoimport``` date.
+4. **veestatus** field is parsed as ```string``` 
 
 ## how i query ?
 > Please refer to ```dev_15003_2/query.js
