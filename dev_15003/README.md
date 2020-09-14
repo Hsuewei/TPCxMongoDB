@@ -16,6 +16,7 @@ Comments:
 
 ## how i import files?
 > please refer to ```dev_15003/mongoimport-straight.sh```
+
 Comments:
 1. Importing these data without specifying datatypes cause the following problems:
 	- **timestamp** field will not be parsed as ```ISOdate()```
