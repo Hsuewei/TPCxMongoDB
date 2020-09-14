@@ -11,7 +11,7 @@ dev_15003_2
 > please refer to ```dev_15003_2/createZone.js```
 
 Comments:
-1. Every **customerId** has 6 different *readingType*, and there are 481 cusomerId
+1. Every **customerId** has 6 different **readingType**, and there are 481 **cusomerId**
 2. Thus, I create 2886 zones and evenly associate to 3 shards
 3. In each zone, I expect any value of **timestamp**
 4. Eventually, this set-up cause uneven chunk distribution
