@@ -248,6 +248,7 @@ chown mongos:mongod /var/log/mongos
 4. [RHEL:File System Layout Calculator](https://access.redhat.com/labs/fslayoutcalculator/)
 5. [Mongodb: wiredTiger.directoryForIndexes](https://docs.mongodb.com/manual/reference/configuration-options/#storage.wiredTiger.engineConfig.directoryForIndexes)
 6. [Mongodb: wiredTiger Journaling](https://docs.mongodb.com/manual/core/journaling/#journaling-and-the-wiredtiger-storage-engine)
+7. [LAB: LVM and mkfs.xfs](https://hackmd.io/bqFv-S3JTtm_j8tsnC_j7A#Lab-LVM-and-mkfsxfs)
 
 #### storage on ```shard01```,```shard02```,```shard03```
 LVM | components | usage
