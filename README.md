@@ -400,7 +400,7 @@ rs.initiate(
   "members": [
         {
           "_id": 0,
-          "host": "shard01:27018",
+          "host": "shard02:27018",
           "arbiterOnly": false,
           "buildIndexes": true,
           "hidden": false,
@@ -438,7 +438,7 @@ rs.initiate(
   "members": [
         {
           "_id": 0,
-          "host": "shard01:27018",
+          "host": "shard03:27018",
           "arbiterOnly": false,
           "buildIndexes": true,
           "hidden": false,
