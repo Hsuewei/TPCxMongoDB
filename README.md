@@ -30,9 +30,9 @@ Table of Contents
 
 ## Highlights 
   - dev_15003_3's result is the best
-  - dev_15003_5 set 1 zone range per customerId-readingType combination
-  - dev_15003_2 experiment round on zone range test, casue unbalanced chunk distribution
-  - dev_15003_1 resemble the real world case, because it dumps data into sharded cluster without pre-defining datatype in mongoimport
+  - dev_15003_5, set 1 zone range per customerId-readingType combination
+  - dev_15003_2, experiment round on zone range test, casue unbalanced chunk distribution
+  - dev_15003_1, resemble the real world case, because it dumps data into sharded cluster without pre-defining datatype in mongoimport
   - dev_15003_4 use hashed ``_id`` field as compound shard key's first element which make this round the worst,
     because i dont't know how to query on ``_id`` field (i.e. conditions,operators..)
     I have to create a compound index without ``_id`` as prefix
